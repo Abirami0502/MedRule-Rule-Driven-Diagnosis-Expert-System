@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Follow-up Questions{% endblock %}
+{% block content %}
+    <h2>Follow-up Questions</h2>
+    <p>Please answer the following questions to help refine the diagnosis.</p>
+    <form method="POST" action="{{ url_for('ask_followup') }}">
+        {% for question in questions %}
+        <fieldset class="question-group">
+            <legend>{{ question }}</legend>
+            <div>
+                <input type="radio" id="q_{{ loop.index }}_yes" name="{{ question }}" value="yes" required>
+                <label for="q_{{ loop.index }}_yes">Yes</label>
+            </div>
+            <div>
+                <input type="radio" id="q_{{ loop.index }}_no" name="{{ question }}" value="no">
+                <label for="q_{{ loop.index }}_no">No</label>
+            </div>
+             </fieldset>
+        {% endfor %}
+        <div>
+            <button type="submit" class="button-primary">Submit Answers & Refine Diagnosis</button>
+            <a href="{{ url_for('diagnose_form') }}" class="button">Cancel and Start Over</a>
+        </div>
+    </form>
+{% endblock %}

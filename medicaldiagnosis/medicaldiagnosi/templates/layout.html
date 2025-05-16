@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Medical Diagnosis System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+<body>
+    <nav>
+        <a href="{{ url_for('welcome') }}">Home</a> |
+        {% if session.user_id %}
+            <span>Welcome, {{ session.user_name }}!</span> |
+            <a href="{{ url_for('diagnose_form') }}">New Diagnosis</a> |
+            <a href="{{ url_for('history_page') }}">View History</a> |
+            <a href="{{ url_for('edit_profile') }}">Edit Profile</a> |
+            <a href="{{ url_for('statistics_page') }}">Statistics</a> |
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a> |
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+    <hr>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; {{ now.year if now else 2024 }} Medical Diagnosis System. Disclaimer: For informational purposes only.</p>
+    </footer>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}Diagnosis Results{% endblock %}
+{% block content %}
+    <h2>Diagnosis Results</h2>
+
+    {% if top_results or top_match_details %}
+        <h3>Refined Potential Diagnoses:</h3>
+        {% if top_results %}
+            <ul>
+            {% for disease, confidence in top_results %}
+                <li>{{ disease.replace("_", " ") | capitalize }} (Confidence: {{ "%.2f"|format(confidence|float) }}%)</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No likely diagnosis found based on the provided information after follow-up.</p>
+        {% endif %}
+
+        {% if top_match_details %}
+            <div class="top-match-details">
+                <h3>--- Details for Top Match ({{ top_match_details.disease_display }}) ---</h3>
+                <p><strong>Confidence:</strong> {{ "%.2f"|format(top_match_details.raw_confidence|float) }}%</p>
+                <p><strong>Recommended Test:</strong> {{ top_match_details.test }}</p>
+                <div>
+                    <strong>Suggested Treatment:</strong>
+                    <p>{{ top_match_details.treatment_str | replace("\n", "<br>") | safe }}</p>
+                </div>
+                <div>
+                    <strong>General Advice:</strong>
+                    <p>{{ top_match_details.advice | replace("\n", "<br>") | safe }}</p>
+                </div>
+                {% if top_match_details.personalized and top_match_details.personalized.strip() not in ["No specific personalized notes. Follow general advice.", ""] %}
+                <div>
+                    <strong>Personalized Notes:</strong>
+                    <p>{{ top_match_details.personalized | replace("\n", "<br>") | safe }}</p>
+                </div>
+                {% endif %}
+
+                <form method="POST" action="{{ url_for('generate_and_save_report') }}" style="margin-top: 20px;">
+                    <button type="submit" class="button-primary">Save Report for Top Match</button>
+                </form>
+                {% if session.last_report_path %}
+                    <p style="margin-top: 10px;">
+                        <a href="{{ url_for('download_last_report') }}" class="button">Download Last Generated Report</a>
+                    </p>
+                {% endif %}
+            </div>
+        {% elif not top_results %} <p>No top match details available.</p>
+        {% endif %}
+
+        {% if follow_up_questions_asked %}
+            <div class="follow-up-summary">
+                <h4>--- Follow-up Questions Asked ---</h4>
+                <ul>
+                    {% for question in follow_up_questions_asked %}
+                    <li>{{ question }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+    {% else %}
+        <p>No diagnosis results to display. This could be due to insufficient information or no matches found.</p>
+        <p><a href="{{ url_for('diagnose_form') }}" class="button">Try a New Diagnosis</a></p>
+    {% endif %}
+
+    <hr>
+    <div class="disclaimer">
+        <p><strong>Disclaimer:</strong> This system provides potential diagnoses based on symptoms and is not a substitute for professional medical advice. Always consult a qualified healthcare provider for any health concerns.</p>
+    </div>
+    <p><a href="{{ url_for('diagnose_form') }}" class="button">Start Another Diagnosis</a></p>
+{% endblock %}

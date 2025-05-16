@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}Diagnosis Statistics{% endblock %}
+{% block content %}
+    <h2>Diagnosis Statistics</h2>
+    {% if error %}
+        <p class="error">Could not load statistics at this time.</p>
+    {% elif no_data %}
+        <p>No diagnosis history available to generate statistics.</p>
+    {% elif chart_url %}
+        <p>The following chart shows the distribution of diagnoses recorded by the system (all users).</p>
+        <img src="{{ chart_url }}" alt="Diagnosis Statistics Chart" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    {% else %}
+        <p>Statistics are being generated or an unknown error occurred.</p>
+    {% endif %}
+{% endblock %}

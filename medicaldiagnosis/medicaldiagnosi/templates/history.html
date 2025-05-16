@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block title %}Diagnosis History{% endblock %}
+{% block content %}
+    <h2>Your Diagnosis History</h2>
+    {% if history_data %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Symptoms Reported</th>
+                    <th>Diagnosis</th>
+                    <th>Confidence (%)</th>
+                    <th>Report File</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in history_data %}
+                <tr>
+                    <td>{{ item.datetime }}</td>
+                    <td>{{ item.symptoms.replace(",", ", ") }}</td>
+                    <td>{{ item.diagnosis.replace("_", " ") | capitalize if item.diagnosis else "N/A" }}</td>
+                    <td>{{ "%.2f"|format(item.confidence|float) if item.confidence is not none else "N/A" }}</td>
+                    <td>{{ item.report_basename if item.report_basename else "N/A" }}</td>
+                    <td>
+                        {% if item.report_filename and item.report_basename != "N/A" %}
+                            <a href="{{ url_for('download_history_report', history_id=item.id) }}" class="button-small">Download Report</a>
+                        {% else %}
+                            No Report
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No diagnosis history found.</p>
+    {% endif %}
+{% endblock %}

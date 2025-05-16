@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block title %}New Diagnosis - {{ user_name }}{% endblock %}
+{% block content %}
+    <h2>New Diagnosis for {{ user_name }}</h2>
+    <p>Please select your symptoms and any applicable risk factors.</p>
+
+    <form method="POST" action="{{ url_for('diagnose_form') }}">
+        <h3>Symptoms</h3>
+        <div class="symptom-search-container">
+            <label for="symptom_search">Search Symptoms:</label>
+            <input type="text" id="symptom_search" placeholder="Type to filter symptoms..." onkeyup="filterSymptoms()">
+        </div>
+
+        <div class="symptom-categories">
+        {% for category, symptoms_in_cat in symptom_categories.items() %}
+            <fieldset class="symptom-category-fieldset">
+                <legend>{{ category }}</legend>
+                <div class="symptom-checkbox-group">
+                {% for symptom in symptoms_in_cat %}
+                    <div class="symptom-item">
+                        <input type="checkbox" id="symptom_{{ symptom }}" name="symptoms" value="{{ symptom }}">
+                        <label for="symptom_{{ symptom }}">{{ symptom.replace("_", " ") | capitalize }}</label>
+                    </div>
+                {% endfor %}
+                </div>
+            </fieldset>
+        {% endfor %}
+        </div>
+
+        <h3>Risk Factors</h3>
+        <fieldset class="risk-factors-fieldset">
+            <legend>Select Applicable Risk Factors</legend>
+            <div class="risk-checkbox-group">
+            {% for factor in unique_risk_factors %}
+                <div class="risk-item">
+                    <input type="checkbox" id="risk_{{ factor }}" name="risk_factors" value="{{ factor }}">
+                    <label for="risk_{{ factor }}">{{ factor.replace("_", " ") | capitalize }}</label>
+                </div>
+            {% endfor %}
+            </div>
+        </fieldset>
+
+        <div>
+            <button type="submit" class="button-primary">Get Initial Diagnosis</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filterSymptoms() {
+    let input, filter, categories, fieldsets, symptoms, symptomItem, label, i, j, k, txtValue;
+    input = document.getElementById('symptom_search');
+    filter = input.value.toLowerCase();
+    categories = document.querySelector('.symptom-categories');
+    fieldsets = categories.getElementsByClassName('symptom-category-fieldset');
+
+    for (i = 0; i < fieldsets.length; i++) {
+        symptoms = fieldsets[i].getElementsByClassName('symptom-item');
+        let categoryHasVisibleSymptom = false;
+        for (j = 0; j < symptoms.length; j++) {
+            label = symptoms[j].getElementsByTagName('label')[0];
+            if (label) {
+                txtValue = label.textContent || label.innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    symptoms[j].style.display = "";
+                    categoryHasVisibleSymptom = true;
+                } else {
+                    symptoms[j].style.display = "none";
+                }
+            }
+        }
+        // Hide category legend if no symptoms in it match the filter
+        if (filter.length > 0 && !categoryHasVisibleSymptom) {
+            fieldsets[i].style.display = "none";
+        } else {
+            fieldsets[i].style.display = "";
+        }
+    }
+}
+</script>
+{% endblock %}

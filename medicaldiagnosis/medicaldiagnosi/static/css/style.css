@@ -1,0 +1,195 @@
+/* static/css/style.css */
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8f0fe; /* Inspired by your bg_color */
+    color: #333;
+    line-height: 1.6;
+}
+
+nav {
+    background-color: #1a237e; /* Inspired by label_color */
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+nav span {
+    margin: 0 10px;
+}
+
+main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #ffffff; /* Inspired by frame_color */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+h1, h2, h3 {
+    color: #1a237e; /* Inspired by label_color */
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+.flashes li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.flashes li.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+.flashes li.danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
+.flashes li.warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba;}
+.flashes li.info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb;}
+
+form div {
+    margin-bottom: 15px;
+}
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #1a237e;
+}
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"] {
+    width: calc(100% - 22px); /* Full width minus padding and border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+form button[type="submit"], .button, .button-primary {
+    background-color: #4CAF50; /* Inspired by button_color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+    display: inline-block;
+}
+form button[type="submit"]:hover, .button:hover, .button-primary:hover {
+    background-color: #45a049;
+}
+.button-small {
+    padding: 5px 8px;
+    font-size: 0.8em;
+}
+
+/* Diagnosis Form Specifics */
+.symptom-search-container { margin-bottom: 20px; }
+.symptom-search-container input { width: 50%; }
+
+.symptom-categories, .risk-factors-fieldset {
+    margin-bottom: 20px;
+}
+.symptom-category-fieldset, .risk-factors-fieldset {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.symptom-category-fieldset legend, .risk-factors-fieldset legend {
+    font-weight: bold;
+    color: #1a237e;
+    padding: 0 10px;
+}
+
+.symptom-checkbox-group, .risk-checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 10px;
+    max-height: 300px; /* For scrollability if needed, but prefer wrapping */
+    overflow-y: auto; /* Only if max-height is restrictive */
+}
+.symptom-item, .risk-item {
+    display: flex;
+    align-items: center;
+}
+.symptom-item input[type="checkbox"], .risk-item input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto; /* Override general input width */
+}
+.symptom-item label, .risk-item label {
+    font-weight: normal;
+    color: #333; /* Regular text color for checkbox labels */
+    margin-bottom: 0;
+}
+
+/* Follow-up Questions */
+.question-group {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.question-group legend {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.question-group div {
+    margin-bottom: 8px;
+}
+.question-group input[type="radio"] {
+    margin-right: 5px;
+    width: auto;
+}
+.question-group label {
+    font-weight: normal;
+    display: inline; /* Keep radio and label on same line */
+}
+
+/* Results Page */
+.top-match-details {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.top-match-details h3 { margin-top: 0; }
+.follow-up-summary { margin-top: 20px; font-size: 0.9em; color: #555; }
+.disclaimer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee; font-style: italic; color: #777; }
+
+/* History Table */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.history-table th, .history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.history-table th {
+    background-color: #f2f2f2; /* Light grey for header */
+    color: #1a237e;
+}
+.history-table tr:nth-child(even) {background-color: #f9f9f9;}
+.history-table tr:hover {background-color: #f1f1f1;}
