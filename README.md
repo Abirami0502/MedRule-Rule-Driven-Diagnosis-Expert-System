@@ -99,6 +99,17 @@ User Feedback Loop: Allow users to provide feedback on diagnoses to improve the 
 
 Mobile Responsiveness: Enhance the web interface for better usability on mobile devices.
 
+Screenshots of MedRule:
+![New Diagnosis screenshot](images/newdiagnosepage.png)
+
+![Follow UP Questions screenshot](images/followupquestionspage.png)
+
+![Diagnose Resultdiagnoseresultpage screenshot](images/.png)
+
+![Statistic screenshot](images/statisticpage.png)
+
+![History screenshot](images/diagnosehistorypage.png)
+
 Disclaimer
 
 MedRule provides potential diagnoses based on reported symptoms and is not a substitute for professional medical advice. Always consult a qualified healthcare provider for any health concerns or before making any decisions related to your health or treatment.
