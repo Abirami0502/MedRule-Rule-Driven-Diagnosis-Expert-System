@@ -104,7 +104,7 @@ Screenshots of MedRule:
 
 ![Follow UP Questions screenshot](images/followupquestionspage.png)
 
-![Diagnose Resultdiagnoseresultpage screenshot](images/.png)
+![Diagnose Resultdiagnoseresultpage screenshot](images/diagnoseresultpage.png)
 
 ![Statistic screenshot](images/statisticpage.png)
 
