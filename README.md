@@ -1,4 +1,3 @@
-Got it! Here's the updated README.md without the "Team Members" and "License" sections.
 
 MedRule: Rule-Driven Diagnosis Expert System
 Overview
@@ -59,25 +58,48 @@ Open your web browser and navigate to http://127.0.0.1:5000 (or the address disp
 
 Usage
 Register/Login: Create a new account or log in if you're an existing user.
+
 Enter Symptoms: On the diagnosis page, input your symptoms. Use clear, descriptive words.
+
 Answer Follow-up Questions: The system may ask specific questions to refine the diagnosis.
+
 View Diagnosis: Receive a potential diagnosis with a confidence score, recommended tests, suggested treatments, and general/personalized advice.
+
 Generate Report: Download a PDF report of your diagnosis for your records.
+
 View History: Access your past diagnosis reports from your user history.
+
 Project Structure
+
 app.py: Main Flask application file, handling routing, user interaction, database operations, and calls to Prolog.
+
 Diagnosis.pl: The Prolog knowledge base containing all disease definitions, rules, treatments, and advice.
+
 templates/: HTML templates for the web interface (e.g., welcome.html, login.html, register.html, diagnose.html, history.html, report.html).
+
 static/: Contains static files like CSS, JavaScript, and images.
+
 reports/: (Created by app.py) Directory where generated PDF diagnosis reports are saved.
+
 medrule.db: (Created by app.py) The SQLite database file for user and history data.
+
 Future Enhancements (Potential)
+
 MongoDB Integration: Replace SQLite with MongoDB for patient records as per the original AIM.
+
 Comorbidity Alerts: More sophisticated rules to explicitly warn about interactions between diagnosed conditions and pre-existing medical conditions.
+
 Recovery Time: Integrate recovery time predictions for diseases in the knowledge base and reports.
+
 Interactive Symptom Input: Implement a more guided symptom input, perhaps with autocomplete or predefined symptom lists.
+
 Machine Learning Integration: Explore integrating ML models for symptom analysis or prediction, complementing the rule-based system.
+
 User Feedback Loop: Allow users to provide feedback on diagnoses to improve the system over time.
+
 Mobile Responsiveness: Enhance the web interface for better usability on mobile devices.
+
 Disclaimer
+
 MedRule provides potential diagnoses based on reported symptoms and is not a substitute for professional medical advice. Always consult a qualified healthcare provider for any health concerns or before making any decisions related to your health or treatment.
+
